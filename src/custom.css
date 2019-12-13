@@ -1,0 +1,10 @@
+/* Custom styles for tic tac toe interface */
+
+
+td {
+  padding: 80px;
+}
+
+#board {
+    display: none;
+}
