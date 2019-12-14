@@ -14,7 +14,7 @@ class Piece
             case 'x':
                 this.html = `
                     <div class="text-center">
-                        <i class="fas fa-times fa-6x text-muted"></i>
+                        <i class="fas fa-times fa-6x"></i>
                     </div>
                 `;
                 this.type = 'X';
@@ -22,7 +22,7 @@ class Piece
             case 'o':
                 this.html = `
                     <div class="text-center">
-                        <i class="far fa-circle fa-5x text-secondary"></i>
+                        <i class="far fa-circle fa-5x"></i>
                     </div>
                 `;
                 this.type = 'O';

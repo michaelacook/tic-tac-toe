@@ -4,9 +4,12 @@ class Player
     /**
      * @param {String} item - the piece Player will use on the board: either 'x' or 'o'
      */
-    constructor(item)
+    constructor(item, name = null)
     {
         this.item = item;
+        if (name !== null) {
+            this.name = name;
+        }
     }
 
 

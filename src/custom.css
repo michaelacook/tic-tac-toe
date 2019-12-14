@@ -10,7 +10,21 @@ td {
   height: 200px;
 }
 
+.far {
+    color: forestgreen;
+}
+
+.fas {
+    color: seagreen;
+}
+
 #start {
-    width: 220px;
+    width: 275px;
     height:75px;
+}
+
+#playerName,
+#playerPiece {
+    background-color: lightgreen;
+    width: 275px;
 }
