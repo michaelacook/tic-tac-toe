@@ -28,3 +28,8 @@ td {
     background-color: lightgreen;
     width: 275px;
 }
+
+#gameStatus {
+    height: 20px;
+    display: none;
+}

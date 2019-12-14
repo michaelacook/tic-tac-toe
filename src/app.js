@@ -2,28 +2,43 @@
 
 const game = new Game();
 
-
 const startBtn = document.getElementById('start');
 
-// Display game board, remove start button
+
+/**
+ * Initialize DOM variables, start game play
+ * @param {Event} e - click event
+ */
 startBtn.addEventListener('click', (e) => {
-    startBtn.style.display = 'none';
     const playerName = document.getElementById('playerName').value;
     const playerPiece = document.getElementById('playerPiece').value;
+    startBtn.style.display = 'none';
     document.getElementById('description').style.display = 'none';
     document.getElementById('options').style.display = 'none';
-    game.initializeGame(playerPiece, playerName);
-
-    // for dev purposes
-    console.log(game.board.spaces);
+    document.getElementById('gameStatus').style.display = 'block';
+    if (playerName !== "") {
+        game.initializeGame(playerPiece, playerName);
+    } else {
+        game.initializeGame(playerPiece);
+    }
 });
 
 
 /**
  * Click handler
- * Runs the Game.move method and passes its return value to the Computer.move method
+ * @param {Event} e - click event
+ * Call playerMove method, pass Player object to checkForWin method
+ * Call computerMove method, pass Computer object to checkForWin method
  */
 document.addEventListener('click', e => {
-    game.computerMove(game.move(e.target.id), game.emptySpaces);
-    game.checkForGameOver();
+    if (game.emptySpaceIDs.includes(e.target.id)) {
+        const player = game.playerMove(e.target.id);
+        if (!game.checkForWin(player)) {
+            setTimeout(() => {
+                const computer = game.computerMove(game.emptySpaces);
+                game.checkForWin(computer);
+            }, 1200);
+        }
+        game.checkForGameOver();
+    }
 });

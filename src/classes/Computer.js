@@ -1,11 +1,12 @@
+// Computer inherits from Player, represents the computer opponent
+
 class Computer extends Player
 {
 
-    constructor(item, name = null)
+    constructor(item, name)
     {
-        super(item, name = null);
+        super(item, name);
     }
-
 
 
     /* For development purposes only. Currently only selects a random space.
@@ -15,10 +16,9 @@ class Computer extends Player
         const self = this;
         if (emptySpaces.length > 0) {
             const space = emptySpaces[ Math.floor(Math.random() * emptySpaces.length) ];
-            setTimeout(() => {
-                space.piece = self.drawPiece(space.id);
-                space.occupied = true;
-            }, 1500);
+            space.piece = self.drawPiece(space.id);
+            space.occupied = true;
+            return true;
         }
     }
 }

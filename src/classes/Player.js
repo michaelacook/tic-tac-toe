@@ -4,12 +4,10 @@ class Player
     /**
      * @param {String} item - the piece Player will use on the board: either 'x' or 'o'
      */
-    constructor(item, name = null)
+    constructor(item, name)
     {
         this.item = item;
-        if (name !== null) {
-            this.name = name;
-        }
+        this.name = name;
     }
 
 
@@ -22,5 +20,24 @@ class Player
         const piece = new Piece(this.item, this);
         document.getElementById(id).innerHTML = piece.html;
         return piece;
+    }
+
+
+    /**
+     * Draw a piece at the selected space
+     * @param {Array} spaces - array of empty spaces on the board
+     * @param {String} id - target space DOM id
+     */
+    doMove(spaces, id)
+    {
+        for (let space of spaces) {
+            if (space.id === id) {
+                space.occupied = true;
+                if (space.piece = this.drawPiece(id)) {
+                    return true;
+                }
+                break;
+            }
+        }
     }
 }
