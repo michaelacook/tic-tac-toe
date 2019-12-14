@@ -1,10 +1,16 @@
 /* Custom styles for tic tac toe interface */
 
-
-td {
-  padding: 80px;
+body {
+    font-family: 'Share Tech Mono', monospace !important;
+    background-color: mediumseagreen;
 }
 
-#board {
-    display: none;
+td {
+  width: 200px;
+  height: 200px;
+}
+
+#start {
+    width: 220px;
+    height:75px;
 }
