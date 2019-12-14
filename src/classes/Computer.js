@@ -13,10 +13,12 @@ class Computer extends Player
     move(emptySpaces)
     {
         const self = this;
-        const space = emptySpaces[ Math.floor(Math.random() * emptySpaces.length) ];
-        setTimeout(() => {
-            space.piece = self.drawPiece(space.id);
-            space.occupied = true;
-        }, 1600)
+        if (emptySpaces.length > 0) {
+            const space = emptySpaces[ Math.floor(Math.random() * emptySpaces.length) ];
+            setTimeout(() => {
+                space.piece = self.drawPiece(space.id);
+                space.occupied = true;
+            }, 1500);
+        }
     }
 }

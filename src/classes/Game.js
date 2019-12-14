@@ -6,6 +6,7 @@ class Game
         this.board = new Board();
         this.active = false;
         this.players = new Array();
+        this.win = false;
     }
 
 
@@ -20,6 +21,22 @@ class Game
         this.createPlayers(playerPiece, playerName);
         this.players[0].active = true;
         this.players[1].active = false;
+    }
+
+
+    /**
+     * Check if no more spaces are available + no player wins
+     * Add game over message to screen
+     */
+    checkForGameOver()
+    {
+        console.log('Game.js line 29')
+        if (!this.win) {
+            if (this.emptySpaces.length === 0) {
+                this.active = false;
+                document.getElementById('gameStatus').innerHTML = `<h5 class="text-danger">No more available spaces. Game over!</h5>`;
+            }
+        }
     }
 
 
@@ -46,6 +63,11 @@ class Game
     }
 
 
+    /**
+     * Computer move
+     * @param {bool} bool - boolean value passed in from player move
+     * @param (Array) spaces - array of empty Space objects
+     */
     computerMove(bool, spaces)
     {
         if (bool) {
@@ -89,11 +111,10 @@ class Game
      */
     get emptySpaces()
     {
-        const flattened = [
+        return [
             ...this.board.spaces[0],
             ...this.board.spaces[1],
             ...this.board.spaces[2]
-        ];
-        return flattened.filter(space => !space.occupied);
+        ].filter(space => !space.occupied);
     }
 }

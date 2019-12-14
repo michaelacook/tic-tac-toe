@@ -23,4 +23,7 @@ startBtn.addEventListener('click', (e) => {
  * Click handler
  * Runs the Game.move method and passes its return value to the Computer.move method
  */
-document.addEventListener('click', e => game.computerMove(game.move(e.target.id), game.emptySpaces));
+document.addEventListener('click', e => {
+    game.computerMove(game.move(e.target.id), game.emptySpaces);
+    game.checkForGameOver();
+});
