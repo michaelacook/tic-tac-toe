@@ -12,5 +12,7 @@ class Space
         this.occupied = false;
         this.piece = null;
         this.id = `col-${x}-row-${y}`;
+        this.x = x;
+        this.y = y;
     }
 }
