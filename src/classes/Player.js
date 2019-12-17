@@ -28,7 +28,7 @@ class Player
      * @param {Array} spaces - array of empty spaces on the board
      * @param {String} id - target space DOM id
      */
-    doMove(spaces, id)
+    move(spaces, id)
     {
         for (let space of spaces) {
             if (space.id === id) {

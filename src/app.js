@@ -31,12 +31,17 @@ startBtn.addEventListener('click', (e) => {
  * Call computerMove method, pass Computer object to checkForWin method
  */
 document.addEventListener('click', e => {
-    if (game.emptySpaceIDs.includes(e.target.id)) {
+    if (game.board.emptySpaceIDs.includes(e.target.id)) {
         const player = game.playerMove(e.target.id);
         if (!game.checkForWin(player)) {
             setTimeout(() => {
-                const computer = game.computerMove(game.emptySpaces);
-                game.checkForWin(computer);
+                if (game.difficulty === "veryEasy") {
+                    const computer = game.computerMove(game.board.emptySpaces);
+                    game.checkForWin(computer);
+                } else {
+                    const computer = game.computerMove(game.board.spaces, game.board.spacesByCoordinate);
+                    game.checkForWin(computer);
+                }
             }, 1200);
         }
         game.checkForGameOver();
