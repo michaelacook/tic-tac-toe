@@ -94,7 +94,7 @@ class Game
     /**
      * Player move
      * @param {String} id - DOM id of clicked space
-     * @return {Array} array containing boolean true and Player object instance
+     * @return {Object} Player object to be passed to checkForWin() method
      */
     playerMove(id)
     {
