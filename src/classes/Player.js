@@ -1,8 +1,11 @@
+// Base class for all players of the game, human and computer
+
 class Player
 {
 
     /**
      * @param {String} item - the piece Player will use on the board: either 'x' or 'o'
+     * @param {String} name - human player name
      */
     constructor(item, name)
     {

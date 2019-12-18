@@ -35,13 +35,8 @@ document.addEventListener('click', e => {
         const player = game.playerMove(e.target.id);
         if (!game.checkForWin(player)) {
             setTimeout(() => {
-                if (game.difficulty === "veryEasy") {
-                    const computer = game.computerMove(game.board.emptySpaces);
-                    game.checkForWin(computer);
-                } else {
-                    const computer = game.computerMove(game.board.spaces, game.board.spacesByCoordinate);
-                    game.checkForWin(computer);
-                }
+                const computer = game.computerMove(game.board.emptySpaces, game.board.rowsByArray);
+                game.checkForWin(computer);
             }, 1200);
         }
         game.checkForGameOver();

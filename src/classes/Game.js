@@ -1,7 +1,7 @@
 class Game
 {
 
-    constructor(difficulty = "veryEasy")
+    constructor(difficulty = "easy")
     {
         this.board = new Board();
         this.active = false;
@@ -53,14 +53,23 @@ class Game
 
     /**
      * Creator method for Player objects
+     * @param {String} playerPiece - 'x' or 'o' to be played
      */
     createPlayers(playerPiece, name)
     {
         this.players.push(new Player(playerPiece, name));
-        if (playerPiece === 'x') {
-            this.players.push(new Computer('o', 'Computer'));
+        if (playerPiece === 'o') {
+            var computerPiece = 'x'
         } else {
-            this.players.push(new Computer('x', 'Computer'));
+            var computerPiece = 'o';
+        }
+        switch (this.difficulty) {
+            case "easy":
+                this.players.push(new Computer(computerPiece, 'Computer'));
+                break;
+            case "hard":
+                this.players.push(new HardComputer(computerPiece, 'Computer'));
+                break;
         }
     }
 
@@ -68,21 +77,14 @@ class Game
     /**
      * Computer move
      * @param {Array} spaces - array of empty Space objects
-     * @param {Object} coordinates - object of key-value pairs containing coordinates and their matching Spaces
+     * @param {Array} rows - array of all the rows and columns on the board
      */
-    computerMove(spaces, coordinates = null)
+    computerMove(spaces, rows)
     {
         if (this.active) {
-            if (coordinates !== null) {
-                if (this.players[1].move(spaces, coordinates)) {
-                    this.togglePlayers();
-                    return this.players[1];
-                }
-            } else {
-                if (this.players[1].move(spaces)) {
-                    this.togglePlayers();
-                    return this.players[1];
-                }
+            if (this.players[1].move(spaces, rows)) {
+                this.togglePlayers();
+                return this.players[1];
             }
         }
     }

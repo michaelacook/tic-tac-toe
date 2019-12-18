@@ -1,3 +1,5 @@
+// Represents 3x3 game grid
+
 class Board
 {
 
@@ -5,6 +7,7 @@ class Board
     {
         this.spaces = this.createSpaces();
     }
+
 
     /**
      * Draws the game board
@@ -78,18 +81,18 @@ class Board
 
 
     /**
-     * Getter for an object of key-value pairs of Space coordinates and instances
+     * Getter for an array containing all rows, columns including diagonal
      * @return {Object} key-value pairs of coordinates and Space instances
+     * In order: 0: horizontal, 1: left-diagonal, 2: right-diagonal, 3: columns
      */
-    get spacesByCoordinate()
+    get rowsByArray()
     {
-        const coordinates = new Object();
-        for (let column of this.spaces) {
-            for (let space of column) {
-                coordinates[`${space.x}:${space.y}`] = space;
-            }
-        }
-        return coordinates;
+        return [
+            this.horizontalSpaces,
+            this.leftDiagonalSpaces,
+            this.rightDiagonalSpaces,
+            this.spaces
+        ];
     }
 
 
