@@ -78,6 +78,7 @@ class Game
      * Computer move
      * @param {Array} spaces - array of empty Space objects
      * @param {Array} rows - array of all the rows and columns on the board
+     * @return {Object} Computer object to be passed to checkForWin() method
      */
     computerMove(spaces, rows)
     {
