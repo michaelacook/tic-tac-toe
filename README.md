@@ -1,7 +1,7 @@
 # Tic Tac Toe
-This app is a work in progress. It is currently playable, but the computer's game strategy is very weak.
-Currently the computer selects a random empty space. Next update should either implement the minimax algorithm
-or develop a game strategy that mimics some human heuristic.
+A moderately challenging Tic Tac Toe web app. Still a work in progress, I plan to implement
+different levels of difficulty in the future. For now, you'll have to use a bit of strategy
+to win as the computer is fairly good at the game.
 
 ## Made with:
 1. Vanilla JavaScript

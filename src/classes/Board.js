@@ -82,15 +82,15 @@ class Board
 
     /**
      * Getter for an array containing all rows, columns including diagonal
-     * @return {Object} key-value pairs of coordinates and Space instances
+     * @return {Array} multidimensional array of Space instances for horizontal, vertical, diagonal
      * In order: 0: horizontal, 1: left-diagonal, 2: right-diagonal, 3: columns
      */
     get rowsByArray()
     {
         return [
             this.horizontalSpaces,
-            this.leftDiagonalSpaces,
-            this.rightDiagonalSpaces,
+            [this.leftDiagonalSpaces,
+            this.rightDiagonalSpaces],
             this.spaces
         ];
     }

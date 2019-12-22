@@ -1,11 +1,5 @@
 // Computer inherits from Player, represents the computer opponent
 
-/*
-Need to alter the calculateMove() and analyzeBoard() algorithm as it favours any row
-or column with an occupied length of 2 most, when it should favour
-rows or columns that it can win
-*/
-
 class Computer extends Player
 {
 
@@ -16,7 +10,10 @@ class Computer extends Player
 
 
     /**
-     *
+     * Make a move on the board grid
+     * @param {Array} spaces - an array of all currently empty spaces on the board
+     * @param {Array} rows - multidimensional array of all rows and columns including diagonal
+     * @return {Bool} true
      */
     move(spaces, rows)
     {
@@ -28,21 +25,102 @@ class Computer extends Player
 
 
     /**
+     * Generates an object of objects containing empty spaces and their ratings
+     * @return {Object} ratingsObject
+     */
+    generateRatings(spaces)
+    {
+        const ratingsObject = new Object();
+        spaces.forEach(space => {
+            ratingsObject[space.id] = {
+                el: space,
+                rating: 0
+            }
+        });
+        return ratingsObject;
+    }
+
+
+    /**
+     * Update an empty space rating
+     * @param {Object} ratings - the object returned by generateRatings()
+     * @param {String} spaceId - the DOM id string for the space being updated
+     * @param {Number} rating - the amount by which the rating is increased
+     */
+    updateRating(ratings, spaceId, rating)
+    {
+        ratings[spaceId].rating += rating;
+    }
+
+
+    /**
+     * Analyzes an array of spaces and assigns a rating to each empty space
+     * @param {Object} ratings - object of rating objects from generateRatings method
+     * @param {Array} rows - an array of rows to be analyzed
+     */
+    analyzeSpaces(ratings, rows)
+    {
+        const priority = {
+            win: 301,
+            second: 150,
+            third:  70,
+            fourth: 30,
+            fifth: 10,
+            none: 0
+        }
+        rows.forEach(row => {
+            let emptySpace;
+            for (let i = 0; i < row.length; i++) {
+                if (!row[i].occupied) {
+                    emptySpace = row[i];
+                    break;
+                }
+            }
+            const occupied = row.filter(space => space.occupied);
+            if (occupied.length === 2) {
+                if (occupied.filter(space => space.piece.owner.name === this.name)
+                    .length === 2) {
+                        this.updateRating(ratings, emptySpace.id, priority.win);
+                        return;
+                } else if (occupied.filter(space => space.piece.owner.name
+                           !== this.name).length === 2) {
+                           this.updateRating(ratings, emptySpace.id, priority.second);
+                } else {
+                    this.updateRating(ratings, emptySpace.id, priority.fifth);
+                }
+            } else if (occupied.length === 1) {
+                if (occupied[0].piece.owner.name === this.name) {
+                    this.updateRating(ratings, emptySpace.id, priority.third);
+                } else {
+                    this.updateRating(ratings, emptySpace.id, priority.fourth);
+                }
+            } else if (occupied.length === 0) {
+                const space = row[Math.floor(Math.random() * 3)];
+                this.updateRating(ratings, space.id, priority.fifth);
+            }
+        });
+    }
+
+
+    /**
      * Calculate the highest-rated potential move
      * @param {Array} spaces - an array of all currently empty spaces on the board
      * @param {Array} rows - multidimensional array of all rows and columns including diagonal
      */
     calculateMove(spaces, rows)
     {
-        const potentialSpaces = this.analyzeBoard(spaces, rows);
-        console.log(potentialSpaces)
-        const targetSpace = potentialSpaces.reduce((highest, space) => {
-                if (space.rating > highest.rating) {
-                    highest = space;
-                    return highest;
-                }
-                return highest;
-            });
+        const ratings = this.analyzeBoard(spaces, rows);
+        const ratingsArray = new Array();
+        for (let key in ratings) {
+            ratingsArray.push(ratings[key]);
+        }
+        const targetSpace = ratingsArray.reduce((acc, curr) => {
+            if (curr.rating > acc.rating) {
+                acc = curr;
+                return acc;
+            }
+            return acc;
+        });
         return targetSpace.el;
     }
 
@@ -53,85 +131,8 @@ class Computer extends Player
      */
     analyzeBoard(spaces, rows)
     {
-        const analyzed = new Array();
-        const [horizontal, leftDiagonal, rightDiagonal, vertical] = rows;
-
-        spaces.forEach(space => {
-            const x = space.x;
-            const y = space.y;
-            const potential = { el: space, rating: 0 };
-            const occupiedHorizontals = horizontal[y].filter(space => space.occupied);
-            const occupiedVerticals = vertical[x].filter(space => space.occupied);
-
-            if (occupiedHorizontals.lenth === 2) {
-                potential.rating += 10;
-            } else if (occupiedHorizontals.length === 1) {
-                potential.rating += 5;
-            } else {
-                potential.rating = potential.rating;
-            }
-            if (occupiedVerticals.lenth === 2) {
-                potential.rating += 10;
-            } else if (occupiedVerticals.length === 1) {
-                potential.rating += 5;
-            } else {
-                potential.rating = potential.rating;
-            }
-
-            // analyze diagonal spaces
-            if (
-                space.x !== 1 && space.y !== 0 ||
-                space.x !== 0 && space.y !== 1 ||
-                space.x !== 2 && space.y !== 1 ||
-                space.x !== 1 && space.y !== 2
-            ) {
-                const occupiedRightDiagonal = rightDiagonal.filter(space => space.occupied);
-                const occupiedLeftDiagonal = leftDiagonal.filter(space => space.occupied);
-
-                // center space
-                if (space.x === 1 && space.y === 1) {
-                    if (occupiedRightDiagonal.length === 2) {
-                        potential.rating += 10;
-                    } else if (occupiedRightDiagonal.length === 1) {
-                        potential.rating += 5;
-                    } else {
-                        potential.rating = potential.rating;
-                    }
-
-                    if (occupiedLeftDiagonal.length === 2) {
-                        potential.rating += 10;
-                    } else if (occupiedLeftDiagonal.length === 1) {
-                        potential.rating += 5;
-                    } else {
-                        potential.rating = potential.rating;
-                    }
-                } else if (
-                    (space.x === 2 && space.y === 2) ||
-                     space.x === 0 && space.y === 0
-                    ) {
-                        if (occupiedRightDiagonal.length === 2) {
-                            potential.rating += 10;
-                        } else if (occupiedRightDiagonal.length == 1) {
-                            potential.rating += 5;
-                        } else {
-                            potential.rating = potential.rating;
-                        }
-                } else if (
-                    (space.x === 2 && space.y === 0) ||
-                           space.x === 0 && space.y === 2
-                    ) {
-                        if (occupiedLeftDiagonal.length === 2) {
-                            potential.rating += 10;
-                        } else if (occupiedLeftDiagonal.length == 1) {
-                            potential.rating += 5;
-                        } else {
-                            potential.rating = potential.rating;
-                        }
-                    }
-            }
-            analyzed.push(potential);
-        });
-
-        return analyzed;
+        const ratings = this.generateRatings(spaces);
+        rows.forEach(spaces => this.analyzeSpaces(ratings, spaces));
+        return ratings;
     }
 }
