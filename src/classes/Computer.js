@@ -61,12 +61,11 @@ class Computer extends Player
     analyzeSpaces(ratings, rows)
     {
         const priority = {
-            win: 301,
-            second: 150,
+            win: 300,
+            second: 175,
             third:  70,
             fourth: 30,
-            fifth: 10,
-            none: 0
+            fifth: 10
         }
         rows.forEach(row => {
             let emptySpace;
@@ -121,6 +120,7 @@ class Computer extends Player
             }
             return acc;
         });
+        console.log(targetSpace.rating);
         return targetSpace.el;
     }
 
@@ -133,6 +133,7 @@ class Computer extends Player
     {
         const ratings = this.generateRatings(spaces);
         rows.forEach(spaces => this.analyzeSpaces(ratings, spaces));
+        console.log(ratings)
         return ratings;
     }
 }
