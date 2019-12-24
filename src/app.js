@@ -7,7 +7,7 @@ const startBtn = document.getElementById('start');
 /**
  * Initialize DOM references and start game
  */
-startBtn.addEventListener('click', (e) => {
+startBtn.addEventListener('click', e => {
     const playerName = document.getElementById('playerName').value;
     const playerPiece = document.getElementById('playerPiece').value;
     startBtn.style.display = 'none';
