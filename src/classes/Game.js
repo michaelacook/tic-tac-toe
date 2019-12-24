@@ -5,23 +5,51 @@ class Game
     {
         this.board = new Board();
         this.active = false;
-        this.players = new Array();
         this.difficulty = difficulty;
-        this.win = false;
     }
 
 
     /**
      * Initializes gameplay
      * @param {String} playerPiece - piece (x or o) that player will use
+     * If players property already initialized, first initialize to empty array
+     * If win = true, set to false;
      */
     initializeGame(playerPiece, playerName = 'Player1')
     {
         this.active = true;
+        this.win = false;
+        this.players = this.createPlayers(playerPiece, playerName);
         this.board.drawBoard('boardArea');
-        this.createPlayers(playerPiece, playerName);
         this.players[0].active = true;
         this.players[1].active = false;
+    }
+
+
+    /**
+     * Run methods to check for vertical, horizontal and diagonal wins
+     * @param {Object} player - Player object for whom game win is being checked
+     * @return {bool} true on win, else false
+     */
+    checkForWin(player)
+    {
+        if (
+            this.verticalWin(player) ||
+            this.horizontalWin(player) ||
+            this.leftDiagonalWin(player) ||
+            this.rightDiagonalWin(player)
+            ) {
+                this.win = true;
+                this.active = false;
+                document.getElementById('gameStatus').innerHTML = `
+                    <h5 class="text-dark">${player.name} wins!
+                    <button class="btn btn-sm btn-success" onclick="newGame();">New Game
+                    </button></h5></h5>
+                `;
+                return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -33,9 +61,11 @@ class Game
     {
         if (!this.win) {
             if (this.board.emptySpaces.length === 0) {
+                this.win = false;
                 this.active = false;
                 document.getElementById('gameStatus').innerHTML = `
-                    <h5 class="text-danger">No more available spaces. Game over!</h5>
+                    <h5 class="text-danger">No more available spaces. Game over!
+                    <button class="btn btn-sm btn-success" onclick="newGame();">New Game</button></h5>
                 `;
             }
         }
@@ -54,10 +84,12 @@ class Game
     /**
      * Creator method for Player objects
      * @param {String} playerPiece - 'x' or 'o' to be played
+     * @return {Array} players
      */
     createPlayers(playerPiece, name)
     {
-        this.players.push(new Player(playerPiece, name));
+        const players = new Array();
+        players.push(new Player(playerPiece, name));
         if (playerPiece === 'o') {
             var computerPiece = 'x'
         } else {
@@ -65,12 +97,11 @@ class Game
         }
         switch (this.difficulty) {
             case "easy":
-                this.players.push(new Computer(computerPiece, 'Computer'));
+                players.push(new Computer(computerPiece, 'Computer'));
                 break;
-            case "hard":
-                this.players.push(new HardComputer(computerPiece, 'Computer'));
-                break;
+            // Add more difficulty levels in the future
         }
+        return players;
     }
 
 
@@ -105,31 +136,6 @@ class Game
                     return this.players[0];
                 }
             }
-        }
-    }
-
-
-    /**
-     * Run methods to check for vertical, horizontal and diagonal wins
-     * @param {Object} player - Player object for whom game win is being checked
-     * @return {bool} true on win, else false
-     */
-    checkForWin(player)
-    {
-        if (
-            this.verticalWin(player) ||
-            this.horizontalWin(player) ||
-            this.leftDiagonalWin(player) ||
-            this.rightDiagonalWin(player)
-            ) {
-                this.win = true;
-                this.active = false;
-                document.getElementById('gameStatus').innerHTML = `
-                    <h5 class="text-dark">${player.name} wins!</h5>
-                `;
-                return true;
-        } else {
-            return false;
         }
     }
 

@@ -120,7 +120,6 @@ class Computer extends Player
             }
             return acc;
         });
-        console.log(targetSpace.rating);
         return targetSpace.el;
     }
 
@@ -133,7 +132,6 @@ class Computer extends Player
     {
         const ratings = this.generateRatings(spaces);
         rows.forEach(spaces => this.analyzeSpaces(ratings, spaces));
-        console.log(ratings)
         return ratings;
     }
 }

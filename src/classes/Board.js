@@ -38,6 +38,25 @@ class Board
 
 
     /**
+     * Iterate over spaces, remove piece html, reset Space properties
+     */
+    clearBoard()
+    {
+        this.spaces.forEach(column => {
+            column.forEach(space => {
+                if (space.occupied) {
+                    const parent = document.getElementById(space.id);
+                    const child = parent.firstElementChild;
+                    parent.removeChild(child);
+                    space.piece = null;
+                    space.occupied = false;
+                }
+            });
+        });
+    }
+
+
+    /**
      * Generates internal representation of game board spaces
      * @return {Array} two-dimensional array of Space objects
      */

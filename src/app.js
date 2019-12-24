@@ -1,22 +1,20 @@
 // Game interaction layer
 
 const game = new Game();
-
 const startBtn = document.getElementById('start');
 
 
 /**
- * Initialize DOM variables, start game play
- * @param {Event} e - click event
+ * Initialize DOM references and start game
  */
-startBtn.addEventListener('click', (e) => {
+const playerInfo = startBtn.addEventListener('click', (e) => {
     const playerName = document.getElementById('playerName').value;
     const playerPiece = document.getElementById('playerPiece').value;
     startBtn.style.display = 'none';
     document.getElementById('description').style.display = 'none';
     document.getElementById('options').style.display = 'none';
     document.getElementById('gameStatus').style.display = 'block';
-    if (playerName !== "") {
+    if (playerName !== "" || playerName == null) {
         game.initializeGame(playerPiece, playerName);
     } else {
         game.initializeGame(playerPiece);
@@ -42,3 +40,15 @@ document.addEventListener('click', e => {
         game.checkForGameOver();
     }
 });
+
+
+/**
+ * Start a new game
+ */
+function newGame() {
+    const piece = game.players[0].item;
+    const name = game.players[0].name;
+    game.board.clearBoard();
+    game.initializeGame(piece, name);
+    document.getElementById('gameStatus').innerHTML = "";
+}
