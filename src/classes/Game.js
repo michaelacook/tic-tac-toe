@@ -43,7 +43,7 @@ class Game
                 this.active = false;
                 document.getElementById('gameStatus').innerHTML = `
                     <h5 class="text-dark">${player.name} wins!
-                    <button class="btn btn-sm btn-success" onclick="newGame();">New Game
+                    <button class="btn btn-sm pl-3 pr-3 btn-success rounded-pill" onclick="newGame();">New Game
                     </button></h5></h5>
                 `;
                 return true;
@@ -65,7 +65,7 @@ class Game
                 this.active = false;
                 document.getElementById('gameStatus').innerHTML = `
                     <h5 class="text-danger">No more available spaces. Game over!
-                    <button class="btn btn-sm btn-success" onclick="newGame();">New Game</button></h5>
+                    <button class="btn btn-sm pl-3 pr-3 btn-success rounded-pill" onclick="newGame();">New Game</button></h5>
                 `;
             }
         }
