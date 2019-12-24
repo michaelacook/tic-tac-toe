@@ -41,8 +41,10 @@ class Game
             ) {
                 this.win = true;
                 this.active = false;
+                let emoji;
+                player.name === 'Computer' ? emoji = "&#128577" : emoji = "&#128526";
                 document.getElementById('gameStatus').innerHTML = `
-                    <h5 class="text-dark">${player.name} wins!
+                    <h5 class="text-dark">${player.name} wins! ${emoji}
                     <button class="btn btn-sm pl-3 pr-3 btn-success rounded-pill" onclick="newGame();">New Game
                     </button></h5></h5>
                 `;
@@ -64,7 +66,7 @@ class Game
                 this.win = false;
                 this.active = false;
                 document.getElementById('gameStatus').innerHTML = `
-                    <h5 class="text-danger">Game over!
+                    <h5 class="text-dark">Game over! &#128528;
                     <button class="btn btn-sm pl-3 pr-3 btn-success rounded-pill" onclick="newGame();">New Game</button></h5>
                 `;
             }
