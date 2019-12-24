@@ -64,7 +64,7 @@ class Game
                 this.win = false;
                 this.active = false;
                 document.getElementById('gameStatus').innerHTML = `
-                    <h5 class="text-danger">No more available spaces. Game over!
+                    <h5 class="text-danger">Game over!
                     <button class="btn btn-sm pl-3 pr-3 btn-success rounded-pill" onclick="newGame();">New Game</button></h5>
                 `;
             }
