@@ -1,8 +1,8 @@
 /* Custom styles for tic tac toe interface */
 
 body {
-    font-family: 'Share Tech Mono', monospace !important;
-    background-color: mediumseagreen;
+  font-family: "Share Tech Mono", monospace !important;
+  background-color: mediumseagreen;
 }
 
 td {
@@ -11,25 +11,25 @@ td {
 }
 
 .far {
-    color: forestgreen;
+  color: forestgreen;
 }
 
 .fas {
-    color: seagreen;
+  color: seagreen;
 }
 
 #start {
-    width: 275px;
-    height:75px;
+  width: 275px;
+  height: 75px;
 }
 
 #playerName,
 #playerPiece {
-    background-color: lightgreen;
-    width: 275px;
+  background-color: lightgreen;
+  width: 275px;
 }
 
 #gameStatus {
-    height: 20px;
-    display: none;
+  height: 20px;
+  display: none;
 }

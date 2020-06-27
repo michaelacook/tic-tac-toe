@@ -1,32 +1,29 @@
 // Represents the HTML X or O piece played on the board
 
-class Piece
-{
-
-    /**
-     * @param {String} piece - must be either 'x' or '0'
-     * @param {String} owner - player that used the piece (player1 or computer)
-     */
-    constructor(piece, owner)
-    {
-        this.owner = owner;
-        switch (piece) {
-            case 'x':
-                this.html = `
+class Piece {
+  /**
+   * @param {String} piece - must be either 'x' or '0'
+   * @param {String} owner - player that used the piece (player1 or computer)
+   */
+  constructor(piece, owner) {
+    this.owner = owner
+    switch (piece) {
+      case "x":
+        this.html = `
                     <div class="text-center">
                         <i class="fas fa-times fa-6x"></i>
                     </div>
-                `;
-                this.type = 'X';
-                break;
-            case 'o':
-                this.html = `
+                `
+        this.type = "X"
+        break
+      case "o":
+        this.html = `
                     <div class="text-center">
                         <i class="far fa-circle fa-5x"></i>
                     </div>
-                `;
-                this.type = 'O';
-                break;
-        }
+                `
+        this.type = "O"
+        break
     }
+  }
 }

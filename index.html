@@ -1,53 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/custom.css" />
     <title>Tic Tac Toe</title>
   </head>
   <body>
-      <div class="container">
-          <h1 class="text-center text-dark mt-5">Tic Tac Toe</h1>
+    <div class="container">
+      <h1 class="text-center text-dark mt-5">Tic Tac Toe</h1>
 
-          <!-- Display win, lose, game over -->
-          <div class="text-center mt-4" id="gameStatus"></div>
+      <!-- Display win, lose, game over -->
+      <div class="text-center mt-4" id="gameStatus"></div>
 
-          <!-- Description -->
-          <div class="text-center mt-4" id="description">
-              <h5 class="text-dark">
-                  Play Tic Tac Toe against the computer! <br>
-                  Try to get three in a row vertically,
-                  horizontally, or diagonally.
-              </h5>
-          </div>
-
-          <!-- Options -->
-          <div class="text-center mt-5" id="options">
-
-              <label class="mt-4" for="playerName">Your Name:</label>
-              <input type="text" class="form-control form-control-lg border border-success text-dark mx-auto" id="playerName" />
-
-              <label class="mt-4" for="playerPiece">I want to use...</label>
-              <select class="form-control form-control-lg border-success mx-auto" id="playerPiece">
-                  <option value="x">Xs</option>
-                  <option value="o">Os</option>
-              </select>
-          </div>
-
-          <!-- Start button -->
-          <div class="text-center mt-5">
-               <button class="mx-auto btn btn-lg btn-success rounded-pill font-weight-bolder" id="start">Start</button>
-          </div>
-
-          <!-- Game board area -->
-          <div id="boardArea"></div>
+      <!-- Description -->
+      <div class="text-center mt-4" id="description">
+        <h5 class="text-dark">
+          Play Tic Tac Toe against the computer! <br />
+          Try to get three in a row vertically, horizontally, or diagonally.
+        </h5>
       </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+      <!-- Options -->
+      <div class="text-center mt-5" id="options">
+        <label class="mt-4" for="playerName">Your Name:</label>
+        <input
+          type="text"
+          class="form-control form-control-lg border border-success text-dark mx-auto"
+          id="playerName"
+        />
+
+        <label class="mt-4" for="playerPiece">I want to use...</label>
+        <select
+          class="form-control form-control-lg border-success mx-auto"
+          id="playerPiece"
+        >
+          <option value="x">Xs</option>
+          <option value="o">Os</option>
+        </select>
+      </div>
+
+      <!-- Start button -->
+      <div class="text-center mt-5">
+        <button
+          class="mx-auto btn btn-lg btn-success rounded-pill font-weight-bolder"
+          id="start"
+        >
+          Start
+        </button>
+      </div>
+
+      <!-- Game board area -->
+      <div id="boardArea"></div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
     <script type="text/javascript" src="src/classes/Player.js"></script>
     <script type="text/javascript" src="src/classes/Computer.js"></script>
     <!-- <script type="text/javascript" src="src/classes/HardComputer.js"></script> -->
